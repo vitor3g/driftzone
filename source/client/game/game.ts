@@ -1,64 +1,43 @@
+import { CameraOperator } from "../core/camera-operator";
+import { InputManager } from "../core/input-manager";
 import { Physics } from "../physics/physics";
-import { Buildings } from "./buildings";
-import { Debug } from "./debug";
-import { EntityManager } from "./entity-manager";
-import { Models } from "./models";
-import { World } from "./world";
-
+import { Sky } from "./sky";
 
 export class Game {
+  private readonly inputManager: InputManager;
   private readonly physics: Physics;
-  private readonly models: Models;
-  private readonly entityManager: EntityManager;
-  private readonly buildings: Buildings;
-  private readonly debug: Debug;
-  private readonly world: World;
+  private readonly cameraOperator: CameraOperator;
+  private readonly sky: Sky;
+
 
   constructor() {
+    this.inputManager = new InputManager();
     this.physics = new Physics();
-    this.models = new Models();
-    this.entityManager = new EntityManager();
-    this.buildings = new Buildings();
-    this.world = new World(this);
-    this.debug = new Debug();
+    this.cameraOperator = new CameraOperator(g_core.getGraphics().getRenderer().camera, 1, 1);
+    this.sky = new Sky();
+
+    g_core.getTickManager().subscribe('game-loop', this.update.bind(this));
   }
 
-  public async start() {
-    await this.physics.start();
 
-    this.entityManager.start();
-
-
-    this.world.createGameWorld();
-
-    this.debug.start();
-
-    g_core.getGraphics().getTickManager().subscribe("game-loop", this.update.bind(this));
-
-    return 1;
+  public getCameraOperator() {
+    return this.cameraOperator;
   }
 
-  public update() {
-    this.debug.update();
+  public getSky() {
+    return this.sky;
   }
+
+  public update(dt: number) {
+    this.physics.update(dt);
+  }
+
+  public getInputManager() {
+    return this.inputManager;
+  }
+
 
   public getPhysics() {
     return this.physics;
-  }
-
-  public getModels() {
-    return this.models;
-  }
-
-  public getWorld() {
-    return this.world;
-  }
-
-  public getEntityManager() {
-    return this.entityManager;
-  }
-
-  public getBuildings() {
-    return this.buildings;
   }
 }

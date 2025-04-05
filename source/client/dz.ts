@@ -5,7 +5,7 @@ export class dzFactoryStatic {
   private readonly logger!: Logger;
 
   constructor() {
-    this.logger = new Logger("dz::factory");
+    this.logger = new Logger("driftzone::factory");
   }
 
   public async create() {
