@@ -1,7 +1,7 @@
-import { Logger } from "@/common/logger";
-import { Game } from "../game/game";
-import { Graphics } from "../graphics/graphics";
-import { TickManager } from "./tick-manager";
+import { Logger } from "@/common/Logger";
+import { Game } from "../game/Game";
+import { Graphics } from "../graphics/Graphics";
+import { TickManager } from "./TickManager";
 
 export class Core {
   private readonly logger: Logger;

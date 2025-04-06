@@ -1,6 +1,6 @@
-import type { Primitive } from "./ui/primitive";
-import { PrimitiveRectangle } from "./ui/rectangle";
-import { PrimitiveText } from "./ui/text";
+import type { Primitive } from "./ui/Primitive";
+import { PrimitiveRectangle } from "./ui/PrimitiveRectangle";
+import { PrimitiveText } from "./ui/PrimitiveText";
 
 export class Primitives {
   private list: Primitive<any>[] = [];

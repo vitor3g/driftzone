@@ -1,5 +1,5 @@
-import { Logger } from "@/common/logger";
-import { CoreModule } from "./core/core";
+import { Logger } from "@/common/Logger";
+import { CoreModule } from "./core/Core";
 
 export class dzFactoryStatic {
   private readonly logger!: Logger;

@@ -1,9 +1,9 @@
-import { Logger } from "@/common/logger";
+import { Logger } from "@/common/Logger";
 import { ImGui, ImGui_Impl } from "@zhobo63/imgui-ts";
-import type { Graphics } from "../graphics";
-import { Primitives } from "./primitives";
+import type { Graphics } from "../Graphics";
+import { Primitives } from "./Primitives";
 
-export class Gui {
+export class GUI {
   private readonly logger: Logger;
   private io!: ImGui.IO;
   private readonly primitives: Primitives;
@@ -32,11 +32,6 @@ export class Gui {
   public update(dt: number) {
     ImGui_Impl.NewFrame(dt);
     ImGui.NewFrame();
-
-    // Painel de FPS
-    ImGui.Begin("Performance");
-    ImGui.Text(`FPS: ${this.io.Framerate.toFixed(1)}`);
-    ImGui.End();
 
     this.primitives.update();
 

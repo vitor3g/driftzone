@@ -1,8 +1,8 @@
+import { Logger } from "@/common/Logger";
+import { SString } from "@/shared/shared.utils";
 import { i18n } from "@lingui/core";
 import { messages as en } from "../../locales/en/messages";
 import { messages as pt_BR } from "../../locales/pt/messages";
-import { Logger } from "@/common/logger";
-import { SString } from "@/shared/shared.utils";
 
 export async function dynamicActivate(locale: string) {
   const logger = new Logger("i18n");

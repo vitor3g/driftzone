@@ -1,4 +1,4 @@
-import { Logger } from "@/common/logger";
+import { Logger } from "@/common/Logger";
 import * as CANNON from "cannon-es";
 
 export class Physics {

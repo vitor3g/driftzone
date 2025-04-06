@@ -1,8 +1,8 @@
 import { SString } from "@/shared/shared.utils";
-import { Detector } from "@/shared/utils/detector";
+import { Detector } from "@/shared/utils/Detector";
 import * as THREE from "three";
 import { EffectComposer, FXAAShader, RenderPass, ShaderPass } from "three/examples/jsm/Addons.js";
-import { Graphics } from "./graphics";
+import { Graphics } from "./Graphics";
 
 export class Renderer {
   public scene: THREE.Scene;
