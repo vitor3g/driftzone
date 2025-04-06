@@ -46,6 +46,7 @@
     "lodash": "^4.17.21",
     "patch-package": "^8.0.0",
     "playcanvas": "^2.6.2",
+    "serve": "^14.2.4",
     "ulid": "^3.0.0",
     "vite-plugin-node-polyfills": "^0.23.0",
     "vite-plugin-wasm": "^3.4.1"
