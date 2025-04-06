@@ -1,32 +1,43 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
+    "target": "ESNext",
     "useDefineForClassFields": true,
     "module": "ESNext",
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "skipLibCheck": true,
-    /* Bundler mode */
-    "typeRoots": ["node_modules/ammojs-typed/ammo/ambient"],
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
-    "isolatedModules": true,
-    "moduleDetection": "force",
-    "noEmit": true,
-    "allowJs": true,
-    /* Linting */
+    "moduleResolution": "Node",
     "strict": true,
-    "baseUrl": ".",
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    "sourceMap": true,
+    "lib": [
+      "dom",
+      "ESNext"
+    ],
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "noFallthroughCasesInSwitch": true,
+    "noEmit": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noImplicitReturns": true,
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["source/*"],
-      "@helpers/*": ["helpers/*"],
-      "@data/*": ["data/*"]
+      "@/*": [
+        "source/*"
+      ],
+      "@helpers/*": [
+        "helpers/*"
+      ],
+      "@data/*": [
+        "data/*"
+      ]
     }
   },
-  "include": ["source", "helpers", "locales", "vite.config.ts", "@types/**/*"],
-  "exclude": ["node_modules"]
+  "include": [
+    "source",
+    "helpers",
+    "locales",
+    "vite.config.ts",
+    "@types/**/*"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

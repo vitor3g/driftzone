@@ -40,10 +40,7 @@ export default defineConfig({
       },
     },
   },
-
-  optimizeDeps: {
-    include: ["ammojs-typed"],
-  },
+  base: process.env.NODE_ENV === 'production' ? '/playcanvas-apple-hunt/' : '/',
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "source"),
@@ -51,4 +48,5 @@ export default defineConfig({
       "@data": path.resolve(__dirname, "data"),
     },
   },
+  assetsInclude: ['**/*.glb'],
 });

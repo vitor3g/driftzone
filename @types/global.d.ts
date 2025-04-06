@@ -1,4 +1,4 @@
-import type { Core } from "@/client/core/Core";
+import type { Core } from "@/core/Core";
 
 export {};
 

@@ -1,11 +1,8 @@
-import { DriftZone } from "@/client/dz";
-import { dynamicActivate } from "@helpers/locale/i18n";
+import { Core } from "./core/Core";
 
-async function bootstrap() {
-  // Initialize i18n
-  dynamicActivate("en");
-
-  await DriftZone.create();
+function bootstrap() {
+  const core = new Core();
+  console.log(core);
 }
 
 bootstrap();

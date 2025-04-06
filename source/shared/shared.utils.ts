@@ -1,5 +1,4 @@
 import format from "@stdlib/string-format";
-import * as THREE from "three";
 
 export const isUndefined = (obj: any): obj is undefined =>
   typeof obj === "undefined";
@@ -67,14 +66,19 @@ export function SString(str: string, ...args: any[]) {
   return format(str, ...args);
 }
 
-export function findFirstMesh(object: THREE.Object3D): THREE.Mesh | null {
-  let mesh: THREE.Mesh | null = null;
 
-  object.traverse((child) => {
-    if (child instanceof THREE.Mesh && !mesh) {
-      mesh = child;
-    }
-  });
+export function adicionarColisoresDeMalha(entity: pc.Entity) {
+  if (entity.render && entity.render.meshInstances.length > 0) {
+    entity.addComponent('collision', {
+      type: 'mesh',
+      asset: entity.render.meshInstances[0].mesh
+    });
 
-  return mesh;
+
+    entity.addComponent('rigidbody', {
+      type: 'static'
+    });
+  }
+
+  entity.children.forEach((child: any) => adicionarColisoresDeMalha(child));
 }
