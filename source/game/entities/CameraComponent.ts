@@ -17,6 +17,8 @@ export class CameraComponent extends IGameComponent<CameraComponentProps> {
       clearColor: this.props.clearColor ?? new pc.Color(0.1, 0.1, 0.1),
       farClip: this.props.farClip ?? 1000,
       nearClip: this.props.nearClip ?? 0.1,
+      toneMapping: pc.TONEMAP_ACES,
+      gammaCorrection: pc.GAMMA_SRGB,
     });
   }
 }

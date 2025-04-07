@@ -10,6 +10,7 @@ export class Game {
 
     const defaultCamera = new CameraEntity({});
 
+
     defaultCamera.setPosition(new pc.Vec3(0, 5, 10));
     defaultCamera.lookAt(new pc.Vec3(0, 0, 0));
 
@@ -22,7 +23,7 @@ export class Game {
 
 
     defaultCamera.addScript<CameraFlyScriptProps>(CameraFlyScript, {
-      speed: 10,
+      speed: 10000,
       lookSpeed: 0.02,
       yaw: 0,
       pitch: 0,
