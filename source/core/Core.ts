@@ -15,6 +15,12 @@ export class Core {
     this.game = new Game();
   }
 
+
+  public async start() {
+    await this.application.start();
+    await this.game.start();
+  }
+
   public getApplication() {
     return this.application;
   }

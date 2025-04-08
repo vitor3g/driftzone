@@ -652,6 +652,18 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
+"@playcanvas/observer@^1.5.1":
+  version "1.6.6"
+  resolved "https://registry.yarnpkg.com/@playcanvas/observer/-/observer-1.6.6.tgz#e6dd3e81941501a087e5d4b24853760d85bd6784"
+  integrity sha512-UMpiEG6VFmgDI2KkKE1I1swommG2AxBQA/zuCoUt+HeUzNOhSSdfED6tVTPluQ+nxp2ScUYSaBCBsjVC/goSiA==
+
+"@playcanvas/pcui@^5.2.0":
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/@playcanvas/pcui/-/pcui-5.2.0.tgz#b70fe9cec326709eba616e2bcedf5716c9644b69"
+  integrity sha512-BhXTACt/XIfnqAmQD06wjJwIsObtfR/rzQYoTWWMyUiWCzZVrd6CZiu5oCsKroEudOQcav8R525QE5g4Okmu5A==
+  dependencies:
+    "@playcanvas/observer" "^1.5.1"
+
 "@polka/url@^1.0.0-next.24":
   version "1.0.0-next.28"
   resolved "https://registry.yarnpkg.com/@polka/url/-/url-1.0.0-next.28.tgz#d45e01c4a56f143ee69c54dd6b12eade9e270a73"

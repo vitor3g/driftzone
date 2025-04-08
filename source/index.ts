@@ -1,8 +1,12 @@
+import "@/styles/global.css";
+import '@playcanvas/pcui/styles';
+
 import { Core } from "./core/Core";
 
-function bootstrap() {
+
+async function bootstrap() {
   const core = new Core();
-  console.log(core);
+  core.start();
 }
 
 bootstrap();
