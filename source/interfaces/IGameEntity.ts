@@ -22,6 +22,10 @@ export abstract class IGameEntity<T> {
     this.app = g_core.getApplication().getApplication();
     this.entity = new pc.Entity();
 
+    if (this.update) {
+      g_core.getTickManager().add(this.update.bind(this));
+    }
+
     this.start();
   }
 

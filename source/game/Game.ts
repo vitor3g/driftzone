@@ -1,23 +1,28 @@
 import * as pc from "playcanvas";
-import { CameraComponent, CameraComponentProps } from "./entities/CameraComponent";
+import { CameraComponent, type CameraComponentProps } from "./components/shared/CameraComponent";
 import { CameraEntity } from "./entities/CameraEntity";
-import { CameraFlyScript, type CameraFlyScriptProps } from "./entities/CameraFlyScript";
+import { FollowCameraScript, type FollowCameraProps } from "./scripts/shared/FollowCameraScript";
 
 export class Game {
-  constructor() {
-  }
+  private box!: pc.Entity;
+
+  constructor() {}
 
   public async start() {
     this._createDefaultLight();
     this._createWhiteFloor();
     this._createBoxesAround();
 
+    this.box = this._createBox();
+
     const defaultCamera = new CameraEntity({});
 
-
-    defaultCamera.setPosition(new pc.Vec3(0, 5, 10));
-    defaultCamera.lookAt(new pc.Vec3(0, 0, 0));
-
+    defaultCamera.addScript<FollowCameraProps>(FollowCameraScript, {
+      target: this.box,
+      height: 1.5,
+      distance: 10,
+      sensitivity: 0.15,
+    });
 
     defaultCamera.addComponent<CameraComponentProps>(CameraComponent, {
       clearColor: new pc.Color(0.1, 0.1, 0.1),
@@ -25,22 +30,36 @@ export class Game {
       nearClip: 0.1
     });
 
-
-    defaultCamera.addScript<CameraFlyScriptProps>(CameraFlyScript, {
-      speed: 10000,
-      lookSpeed: 0.02,
-      yaw: 0,
-      pitch: 0,
-      moveForward: true,
-      moveBackward: true,
-      moveLeft: true,
-      moveRight: true
-    });
-
     defaultCamera.addToRoot();
   }
 
-  public update() {
+  public update() {}
+
+  private _createBox(): pc.Entity {
+    const app = g_core.getApplication().getApplication();
+
+    const box = new pc.Entity("PlayerBox");
+
+    box.addComponent("model", { type: "box" });
+
+    box.addComponent("rigidbody", {
+      type: "dynamic",
+      mass: 1,
+      friction: 0.5,
+      restitution: 0.1,
+    });
+
+    box.addComponent("collision", {
+      type: "box",
+      halfExtents: new pc.Vec3(0.5, 0.5, 0.5),
+    });
+
+    box.setLocalScale(1, 1, 1);
+    box.setPosition(0, 5, 0);
+
+    app.root.addChild(box);
+
+    return box;
   }
 
   private _createDefaultLight() {
@@ -49,7 +68,7 @@ export class Game {
       type: "directional",
       color: new pc.Color(1, 1, 1),
       intensity: 1.2,
-      castShadows: true,
+      castShadows: false,
       shadowBias: 0.2,
       shadowDistance: 50,
     });
@@ -58,12 +77,11 @@ export class Game {
     g_core.getApplication().getApplication().root.addChild(light);
   }
 
-
   private _createBoxesAround() {
     const app = g_core.getApplication().getApplication();
 
-    const textureAsset = new pc.Asset('generic_dev02', 'texture', {
-      url: '/data/materials/generic_dev02.png',
+    const textureAsset = new pc.Asset("generic_dev04", "texture", {
+      url: "/data/materials/generic_dev04.png",
     });
 
     textureAsset.ready(() => {
@@ -80,24 +98,21 @@ export class Game {
         const z = Math.sin(angle) * radius;
 
         const box = new pc.Entity(`Box_${i}`);
-        box.addComponent('model', {
-          type: 'box'
-        });
+        box.addComponent("model", { type: "box" });
 
-        box.addComponent('rigidbody', {
-          type: 'dynamic',
+        box.addComponent("rigidbody", {
+          type: "dynamic",
           mass: 1,
           friction: 0.5,
-          restitution: 0.1
+          restitution: 0.1,
         });
 
-        box.addComponent('collision', {
-          type: 'box',
-          halfExtents: new pc.Vec3(0.5, 0.5, 0.5)
+        box.addComponent("collision", {
+          type: "box",
+          halfExtents: new pc.Vec3(0.5, 0.5, 0.5),
         });
 
         box.model!.material = material;
-
         box.setLocalScale(1, 1, 1);
         box.setPosition(x, 2 + Math.random() * 2, z);
 
@@ -109,17 +124,14 @@ export class Game {
     app.assets.load(textureAsset);
   }
 
-
   private _createWhiteFloor() {
-    const floor = new pc.Entity('WhiteFloor');
+    const floor = new pc.Entity("WhiteFloor");
 
-    floor.addComponent('model', {
-      type: 'plane',
-    });
+    floor.addComponent("model", { type: "plane" });
 
     const material = new pc.StandardMaterial();
-    const textureAsset = new pc.Asset('generic_dev', 'texture', {
-      url: '/data/materials/generic_dev.png',
+    const textureAsset = new pc.Asset("generic_dev", "texture", {
+      url: "/data/materials/generic_dev.png",
     });
 
     textureAsset.ready(() => {
@@ -129,16 +141,12 @@ export class Game {
       floor.model!.material = material;
     });
 
-    floor.addComponent('collision', {
-      type: 'box',
-      halfExtents: new pc.Vec3(50, 0.01, 50)
+    floor.addComponent("collision", {
+      type: "box",
+      halfExtents: new pc.Vec3(50, 0.01, 50),
     });
 
-
-    floor.addComponent('rigidbody', {
-      type: 'static'
-    });
-
+    floor.addComponent("rigidbody", { type: "static" });
 
     g_core.getApplication().getApplication().assets.add(textureAsset);
     g_core.getApplication().getApplication().assets.load(textureAsset);
@@ -147,5 +155,4 @@ export class Game {
     floor.setPosition(0, 0, 0);
     g_core.getApplication().getApplication().root.addChild(floor);
   }
-
 }

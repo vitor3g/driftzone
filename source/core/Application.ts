@@ -27,6 +27,7 @@ export class Application {
 
     this.label = new Label();
     this.label.dom.style.fontSize = '14px';
+    this.label.dom.style.color = 'red';
 
     document.body.appendChild(this.label.dom);
 
@@ -42,6 +43,7 @@ export class Application {
       pc.WasmModule.getInstance('Ammo', () => resolve(true));
     });
 
+    this._setupEnvironment(this.app);
 
     this.app.start();
 
@@ -59,6 +61,52 @@ export class Application {
     const fps = Math.round(1 / dt);
 
     this.label.text = String(fps);
+  }
+
+  private _setupEnvironment(app: pc.Application) {
+    const faces = ['posx', 'negx', 'posy', 'negy', 'posz', 'negz'];
+    const urls = faces.map(face => `/data/sky/${face}.png`);
+
+    const imageFaces: HTMLImageElement[] = [];
+    let loaded = 0;
+
+    urls.forEach((url, index) => {
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      img.src = url;
+
+      img.onload = function () {
+        imageFaces[index] = img;
+
+        loaded++;
+        if (loaded === 6) {
+          const cubemap = new pc.Texture(app.graphicsDevice, {
+            cubemap: true,
+            format: pc.PIXELFORMAT_RGBA16F,
+            width: img.width,
+            height: img.height,
+            mipmaps: true,
+            minFilter: pc.FILTER_LINEAR_MIPMAP_LINEAR,
+            type: pc.SKYTYPE_INFINITE,
+            magFilter: pc.FILTER_LINEAR,
+            addressU: pc.ADDRESS_CLAMP_TO_EDGE,
+            addressV: pc.ADDRESS_CLAMP_TO_EDGE,
+            anisotropy: 16
+          });
+
+          cubemap.name = 'skybox';
+
+          app.scene.envAtlas = cubemap;
+          app.scene.skybox = cubemap;
+          app.scene.skyboxMip = 1;
+
+          app.scene.skyboxIntensity = 1;
+          cubemap.setSource(imageFaces);
+
+        }
+      };
+    });
+
   }
 
 

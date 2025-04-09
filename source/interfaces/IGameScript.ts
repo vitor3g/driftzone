@@ -18,6 +18,10 @@ export abstract class IGameScript<T> {
     this.app = g_core.getApplication().getApplication();
 
     this.start();
+
+    if (this.update) {
+      g_core.getTickManager().add(this.update.bind(this));
+    }
   }
 
   /** Called once when the script starts */

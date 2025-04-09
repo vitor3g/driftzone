@@ -17,7 +17,12 @@ export abstract class IGameComponent<T> {
     this.entity = entity;
     this.app = g_core.getApplication().getApplication();
 
+
     this.start();
+
+    if (this.update) {
+      g_core.getTickManager().add(this.update.bind(this));
+    }
   }
 
   /** Called once when the component is initialized */

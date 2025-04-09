@@ -1,7 +1,7 @@
 import { IGameScript } from "@/interfaces/IGameScript";
 import * as pc from "playcanvas";
 
-export interface CameraFlyScriptProps {
+export interface FlyScriptProps {
   speed: number;
   lookSpeed: number;
   yaw: number;
@@ -12,8 +12,8 @@ export interface CameraFlyScriptProps {
   moveRight: boolean;
 }
 
-export class CameraFlyScript extends IGameScript<CameraFlyScriptProps> {
-  constructor(entity: pc.Entity, props: CameraFlyScriptProps, id?: string) {
+export class FlyCameraScript extends IGameScript<FlyScriptProps> {
+  constructor(entity: pc.Entity, props: FlyScriptProps, id?: string) {
     props = {
       ...props,
       speed: 10,

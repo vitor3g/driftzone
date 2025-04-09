@@ -42,6 +42,8 @@ export default [
       "no-async-promise-executor": "off",
       "@typescript-eslint/no-unsafe-return": "off",
       'no-prototype-builtins': 'off',
+      '@typescript-eslint/no-empty-object-type': 'off',
+      '@typescript-eslint/no-unused-vars': 'off'
     },
   },
 ];

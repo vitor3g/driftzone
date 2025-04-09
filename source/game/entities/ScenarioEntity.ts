@@ -22,7 +22,6 @@ export class ScenarioEntity extends IGameEntity<ScenarioEntityProps> {
 
       const entity = container.instantiateRenderEntity();
 
-
       this.entity.addChild(entity);
     });
   }
